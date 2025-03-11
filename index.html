@@ -6,12 +6,13 @@
   <title>Minecraft Adventures</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <!-- Header with Logo and Navbar -->
   <header>
     <div class="header-content">
-      <img src="logo.svg" alt="Minecraft Logo" class="logo">
+      <a href=""><img src="logo.svg" alt="Minecraft Logo" class="logo"></a>
       <!-- Hamburger Menu Icon -->
       <button class="hamburger" aria-label="Toggle navigation">
         <span class="hamburger-icon"></span>
@@ -49,7 +50,7 @@
     <h2>Games</h2>
     <div class="games-grid">
       <div class="game-card">
-        <a href="https://www.minecraft.net/en-us/about-minecraft"><img src="Minecraft.jpg" alt="Minecraft Ed">  </a>
+        <a href="https://www.minecraft.net/en-us/about-minecraft"><img src="Minecraft.jpg" alt="Minecraft Ed"></a>
         <h3>Minecraft Education</h3>
         <p>Explore custom maps and complete challenges created by the community.</p>
       </div>
@@ -103,17 +104,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2023 Minecraft Adventures. All rights reserved.</p>
+    <p>&copy; 2004 Minecraft Adventures. All rights reserved.</p>
   </footer>
-
-  <!-- JavaScript for Hamburger Menu -->
-  <script>
-    const hamburger = document.querySelector('.hamburger');
-    const navbar = document.querySelector('.navbar');
-
-    hamburger.addEventListener('click', () => {
-      navbar.classList.toggle('active');
-    });
-  </script>
 </body>
 </html>

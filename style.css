@@ -33,6 +33,8 @@ header {
 .logo {
   height: 30px;
   width: auto;
+  display: flex;
+  justify-content: center;
 }
 
 /* Hamburger Menu */
@@ -260,6 +262,14 @@ footer {
 @media (max-width: 768px) {
   .hamburger {
     display: block; 
+  }
+
+  .logo{
+    display: flex;
+  }
+
+  .hero-content{
+    margin-top: -50px;
   }
 
   .navbar {
