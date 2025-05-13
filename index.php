@@ -1,3 +1,30 @@
+<?php
+session_start();
+require_once 'config.php';
+
+// Generate a session ID if not exists
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['user_id'] = session_id();
+}
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $message = $_POST['message'] ?? '';
+    $session_id = $_SESSION['user_id'];
+
+    $sql = "INSERT INTO submissions (name, email, message, session_id) VALUES (?, ?, ?, ?)";
+    $stmt = $pdo->prepare($sql);
+    
+    try {
+        $stmt->execute([$name, $email, $message, $session_id]);
+        $success_message = "Message sent successfully!";
+    } catch(PDOException $e) {
+        $error_message = "Error sending message: " . $e->getMessage();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +39,7 @@
   <!-- Header with Logo and Navbar -->
   <header>
     <div class="header-content">
-      <a href=""><img src="assets/logo.svg" alt="Minecraft Logo" class="logo"></a>
+      <a href="index.php"><img src="assets/logo.svg" alt="Minecraft Logo" class="logo"></a>
       <!-- Hamburger Menu Icon -->
       <button class="hamburger" aria-label="Toggle navigation">
         <span class="hamburger-icon"></span>
@@ -24,6 +51,7 @@
           <li><a href="#games">Games</a></li>
           <li><a href="#trailers">Trailers</a></li>
           <li><a href="#contact">Contact Us</a></li>
+          <li><a href="view_submissions.php">View Messages</a></li>
         </ul>
       </nav>
     </div>
@@ -88,7 +116,14 @@
   <!-- Contact Section -->
   <section id="contact" class="section">
     <h2>Contact Us</h2>
-    <form>
+    <?php if (isset($success_message)): ?>
+        <div class="success"><?php echo $success_message; ?></div>
+    <?php endif; ?>
+
+    <?php if (isset($error_message)): ?>
+        <div class="error"><?php echo $error_message; ?></div>
+    <?php endif; ?>
+    <form method="POST" action="">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Steve" required>
       
@@ -107,4 +142,4 @@
     <p>&copy; 2004 Minecraft Adventures. All rights reserved.</p>
   </footer>
 </body>
-</html>
+</html> 
