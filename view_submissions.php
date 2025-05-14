@@ -76,8 +76,8 @@ $submissions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <p><strong>Message:</strong> <?php echo htmlspecialchars($submission['message']); ?></p>
                         <p class="meta">Sent on: <?php echo date('F j, Y, g:i a', strtotime($submission['created_at'])); ?></p>
                         <div class="message-actions">
-                            <a href="edit_submission.php?id=<?php echo $submission['id']; ?>" class="btn">Edit</a>
-                            <a href="view_submissions.php?delete=<?php echo $submission['id']; ?>" class="btn" onclick="return confirm('Are you sure you want to delete this message?')">Delete</a>
+                            <a href="edit_submission.php?id=<?php echo $submission['id']; ?>" class="btnEdit">Edit</a>
+                            <a href="view_submissions.php?delete=<?php echo $submission['id']; ?>" class="btnDelete" onclick="return confirm('Are you sure you want to delete this message?')">Delete</a>
                         </div>
                     </div>
                 <?php endforeach; ?>

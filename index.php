@@ -37,25 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
   <!-- Header with Logo and Navbar -->
-  <header>
-    <div class="header-content">
-      <a href="index.php"><img src="assets/logo.svg" alt="Minecraft Logo" class="logo"></a>
-      <!-- Hamburger Menu Icon -->
-      <button class="hamburger" aria-label="Toggle navigation">
-        <span class="hamburger-icon"></span>
-      </button>
-      <!-- Navbar Links -->
-      <nav class="navbar">
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#games">Games</a></li>
-          <li><a href="#trailers">Trailers</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-          <li><a href="view_submissions.php">View Messages</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <?php include('components/header.html') ?>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -74,44 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </section>
 
   <!-- Games Section -->
-  <section id="games" class="section">
-    <h2>Games</h2>
-    <div class="games-grid">
-      <div class="game-card">
-        <a href="https://www.minecraft.net/en-us/about-minecraft"><img src="assets/Minecraft.jpg" alt="Minecraft Ed"></a>
-        <h3>Minecraft Education</h3>
-        <p>Explore custom maps and complete challenges created by the community.</p>
-      </div>
-      <div class="game-card">
-        <a href="https://www.minecraft.net/en-us/about-dungeons"><img src="assets/dungeons.webp" alt="Minecraft Dungeons"></a>
-        <h3>Minecraft Dungeons</h3>
-        <p>Gather resources, craft tools, and survive against mobs in this challenging mode.</p>
-      </div>
-      <div class="game-card">
-        <a href="https://www.minecraft.net/en-us/about-legends"><img src="assets/legends.webp" alt="Minecraft Legends"></a>
-        <h3>Minecraft Legends</h3>
-        <p>Unleash your creativity with unlimited resources and the ability to fly.</p>
-      </div>
-      <div class="game-card">
-        <a href="https://education.minecraft.net/en-us"><img src="assets/education.png" alt="Minecraft Ed"></a>
-        <h3>Minecraft Education</h3>
-        <p>Explore custom maps and complete challenges created by the community.</p>
-      </div>
-    </div>
-  </section>
- 
+  <?php include('components/games.html') ?>
+
   <!-- Trailers Section -->
-  <section id="trailers" class="section">
-    <h2>Trailers</h2>
-    <div class="trailers-grid">
-      <iframe src="https://www.youtube.com/embed/0Cbw1b2mkGk?si=hcB-pWno8coFgubz" title="Minecraft Trailer 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/CoZ2V7XsSYk?si=9ZhOKS1HPMUiSDmA" title="Minecraft Trailer 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/VXC9NPueCd4?si=xpMKahVyOnv1sbJN" title="Minecraft Trailer 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/309qoKYlgTI?si=U1C2IH1ESey8MRXI" title="Minecraft Trailer 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/Rla3FUlxJdE?si=Nxmrt_hQm9pmgZ3s" title="Minecraft Trailer 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/XwQsEvYOLzM?si=QxYGN4y2n-wgS7n8" title="Minecraft Trailer 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-  </section>
+  <?php include('components/trailers.html'); ?>
 
   <!-- Contact Section -->
   <section id="contact" class="section">
@@ -123,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php if (isset($error_message)): ?>
         <div class="error"><?php echo $error_message; ?></div>
     <?php endif; ?>
-    <form method="POST" action="">
+    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>#contact">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Steve" required>
       
@@ -138,8 +86,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </section>
 
   <!-- Footer -->
-  <footer>
-    <p>&copy; 2004 Minecraft Adventures. All rights reserved.</p>
-  </footer>
+  <?php include('components/footer.html') ?>
+
+  <script>
+    // If there's a success or error message, ensure we're at the right position
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash === '#contact') {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+  </script>
 </body>
 </html> 

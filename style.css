@@ -189,7 +189,7 @@ header {
   background-color: #45a049;
   /* Move button up slightly */
   transform: translateY(-2px);
-}
+} 
 
 /* ====== SECTION LAYOUT ====== */
 /* Common styles for all sections */
@@ -416,15 +416,27 @@ form button:hover {
 }
 
 /* Success message */
-.alert.success {
+.success {
   background-color: #4CAF50;
+  padding: 10px;
+  font-weight: bold;
+  font: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 /* Error message */
-.alert.error {
+.error {
   background-color: #f44336;
+  padding: 10px;
+  font-weight: bold;
+  font: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 /* ====== FOOTER ====== */
