@@ -1,0 +1,622 @@
+/* ====== BASIC SETTINGS ====== */
+/* These styles apply to the whole website */
+body {
+  /* Use a simple, readable font */
+  font-family: 'Arial', sans-serif;
+  /* Dark background for gaming theme */
+  background-color: #1a1a1a;
+  /* Light text color for contrast */
+  color: #f0f0f0;
+  /* Remove default spacing */
+  margin: 0;
+  padding: 0;
+  /* Make text easier to read */
+  line-height: 1.6;
+}
+
+/* Use pixel-style font for headings */
+h2 {
+  font-family: 'Press Start 2P';
+}
+
+/* ====== HEADER AND NAVIGATION ====== */
+/* Top bar that stays visible when scrolling */
+header {
+  background-color: #333;
+  padding: 10px 20px;
+  /* Make header stick to top */
+  position: sticky;
+  top: 0;
+  /* Keep header above other content */
+  z-index: 1000;
+  /* Add subtle shadow */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for logo and navigation */
+.header-content {
+  /* Put items in a row */
+  display: flex;
+  /* Center items vertically */
+  align-items: center;
+  /* Space between logo and navigation */
+  justify-content: space-between;
+  /* Limit width on large screens */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo styling */
+.logo {
+  height: 30px;
+  width: auto;
+  /* Center the logo */
+  display: flex;
+  justify-content: center;
+}
+
+/* ====== MOBILE MENU BUTTON ====== */
+/* Hidden by default on desktop */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* The three lines of the menu button */
+.hamburger-icon {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  position: relative;
+}
+
+/* Create top and bottom lines using pseudo-elements */
+.hamburger-icon::before,
+.hamburger-icon::after {
+  content: '';
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  /* Smooth animation when clicked */
+  transition: all 0.3s ease;
+}
+
+/* Position the lines */
+.hamburger-icon::before {
+  top: -8px;
+}
+
+.hamburger-icon::after {
+  top: 8px;
+}
+
+/* ====== NAVIGATION MENU ====== */
+.navbar {
+  display: flex;
+}
+
+/* Remove default list styling */
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* Put links in a row */
+  display: flex;
+  /* Space between links */
+  gap: 20px;
+}
+
+.navbar li {
+  display: flex;
+  align-items: center;
+}
+
+/* Style the navigation links */
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 15px;
+  border-radius: 5px;
+  /* Smooth color change on hover */
+  transition: all 0.3s ease;
+  display: block;
+  width: 100%;
+}
+
+/* Change link color on hover */
+.navbar a:hover {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+/* ====== HERO SECTION ====== */
+/* Big image section at the top */
+.hero {
+  /* Add background image */
+  background: url('../assets/hero.webp') no-repeat center center/cover;
+  height: 400px;
+  /* Center content vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+/* Container for hero text */
+.hero-content {
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Pixel font for main title */
+.hero h1 {
+  font-family: 'Press Start 2P';
+}
+
+/* Larger text for subtitle */
+.hero p {
+  font-size: 1.2rem;
+  margin: 10px 0 20px;
+}
+
+/* ====== BUTTONS ====== */
+/* Style for all buttons */
+.btn, .btnEdit, .btnBack {
+    /* Minecraft green color */
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    /* Smooth transition for hover effect */
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Button hover effect */
+.btn:hover, .btnEdit:hover, .btnBack:hover {
+    /* Slightly darker green */
+    background-color: #45a049;
+    /* Move button up slightly */
+    transform: translateY(-2px);
+}
+
+/* Message actions container */
+.message-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+/* Back to Messages Button */
+.btnBack {
+  background-color: #666;
+  text-align: center;
+}
+
+.btnBack:hover {
+    background-color: #555;
+}
+
+/* Edit button specific styles */
+.btnEdit {
+    background-color: #4CAF50;
+}
+
+.btnEdit:hover {
+    background-color: #45a049;
+}
+
+/* ====== SECTION LAYOUT ====== */
+/* Common styles for all sections */
+.section {
+  padding: 40px 20px;
+  /* Limit width on large screens */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section titles */
+.section h2 {
+  color: #4CAF50;
+  /* Add line under title */
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 10px;
+}
+
+/* ====== ABOUT SECTION ====== */
+.about-image {
+  width: 100%;
+}
+
+/* ====== GAMES SECTION ====== */
+/* Grid layout for game cards */
+.games-grid {
+  display: grid;
+  /* Responsive grid - adjusts columns based on screen size */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Individual game cards */
+.game-card {
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  /* Smooth hover animation */
+  transition: transform 0.3s ease;
+}
+
+/* Lift card up on hover */
+.game-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Game card images */
+.game-card img {
+  width: 100%;
+  height: 200px;
+  /* Prevent image distortion */
+  object-fit: cover;
+}
+
+/* Game card title */
+.game-card h3 {
+  font-size: 1.5rem;
+  margin: 15px 15px 10px;
+  color: #4CAF50;
+}
+
+/* Game card description */
+.game-card p {
+  font-size: 1rem;
+  margin: 0 15px 15px;
+  color: #f0f0f0;
+}
+
+/* ====== TRAILERS SECTION ====== */
+/* Grid layout for video trailers */
+.trailers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Style for embedded videos */
+.trailers-grid iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 10px;
+  /* Add shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== CONTACT FORM ====== */
+/* Stack form elements vertically */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Make labels stand out */
+form label {
+  font-weight: bold;
+}
+
+/* Style form inputs */
+form input,
+form textarea,
+form button {
+  padding: 10px;
+  border: 1px solid #4CAF50;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+}
+
+/* Style submit button */
+form button {
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Button hover effect */
+form button:hover {
+  background-color: #45a049;
+}
+
+/* ====== MESSAGES SECTION ====== */
+/* Container for all messages */
+#messages-container {
+  display: grid;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Individual message card */
+.message-card {
+  background-color: #333;
+  padding: 15px;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Message title */
+.message-card h3 {
+  color: #4CAF50;
+  margin: 0 0 10px 0;
+}
+
+/* Message text */
+.message-card p {
+  margin: 0 0 10px 0;
+}
+
+/* Message metadata (email and date) */
+.message-card .meta {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Container for edit/delete buttons */
+.message-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Style for action buttons */
+.message-actions button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+/* Button hover effect */
+.message-actions button:hover {
+  transform: scale(1.1);
+}
+
+/* ====== POPUP (MODAL) ====== */
+/* Background overlay */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1001;
+}
+
+/* Modal window */
+.modal-content {
+  background-color: #333;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+}
+
+/* Close button hover */
+.close:hover {
+  color: #fff;
+}
+
+/* ====== ALERT MESSAGES ====== */
+/* Base alert style */
+.alert {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  display: none;
+}
+
+/* Success and Error Messages */
+.success, .error {
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid #45a049;
+}
+
+.error {
+    background-color: #f44336;
+    color: white;
+    border: 2px solid #da190b;
+}
+
+/* Message Actions */
+.message-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btnEdit, .btnDelete {
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.btnEdit {
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid #45a049;
+}
+
+.btnDelete {
+    background-color: #f44336;
+    color: white;
+    border: 2px solid #da190b;
+}
+
+.btnEdit:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.btnDelete:hover {
+    background-color: #da190b;
+    transform: translateY(-2px);
+}
+
+/* ====== FOOTER ====== */
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+/* ====== MOBILE RESPONSIVE DESIGN ====== */
+/* Styles for screens smaller than 768px (tablets and phones) */
+@media (max-width: 768px) {
+  /* Show hamburger menu */
+  .hamburger {
+    display: block;
+  }
+
+  /* Adjust logo size */
+  .logo {
+    height: 25px;
+  }
+
+  /* Adjust hero text size */
+  .hero-content {
+    padding: 10px;
+  }
+
+  /* Hide navigation by default */
+  .navbar {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    padding: 20px;
+  }
+
+  /* Show navigation when active */
+  .navbar.active {
+    display: block;
+  }
+
+  /* Stack navigation links vertically */
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Full-width navigation links */
+  .navbar a {
+    width: 100%;
+  }
+
+  /* Adjust modal size */
+  .modal-content {
+    width: 90%;
+    margin: 20% auto;
+  }
+
+  /* Stack form elements */
+  form {
+    gap: 15px;
+  }
+
+  /* Adjust message cards */
+  .message-card {
+    margin: 10px 0;
+  }
+
+  /* Position action buttons */
+  .message-actions {
+    position: static;
+    margin-top: 10px;
+  }
+}
+
+/* ====== FORM BUTTONS ====== */
+form .button-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form .btn {
+    width: 100%;
+    padding: 13px 20px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+form .btn-primary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+form .btn-secondary {
+    background-color: #666;
+    color: white;
+}
+
+form .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}

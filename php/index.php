@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once 'database.php';
 
 // Generate a session ID if not exists
 if (!isset($_SESSION['user_id'])) {
@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minecraft Adventures</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <script src="script.js" defer></script>
+  <script src="../js/script.js" defer></script>
 </head>
 <body>
   <!-- Header with Logo and Navbar -->
-  <?php include('components/header.html') ?>
+  <?php include('../components/header.html') ?>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -52,14 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <section id="about" class="section">
     <h2>About Minecraft</h2>
     <p>Minecraft is a sandbox game where you can build, explore, and survive in a blocky, pixelated world. Create your own adventures, fight mobs, and craft amazing structures!</p>
-    <img src="assets/about.png" alt="Minecraft World" class="about-image">
+    <img src="../assets/about.png" alt="Minecraft World" class="about-image">
   </section>
 
   <!-- Games Section -->
-  <?php include('components/games.html') ?>
+  <?php include('../components/games.html') ?>
 
   <!-- Trailers Section -->
-  <?php include('components/trailers.html'); ?>
+  <?php include('../components/trailers.html'); ?>
 
   <!-- Contact Section -->
   <section id="contact" class="section">
@@ -86,17 +86,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </section>
 
   <!-- Footer -->
-  <?php include('components/footer.html') ?>
+  <?php include('../components/footer.html') ?>
 
   <script>
     // If there's a success or error message, ensure we're at the right position
     document.addEventListener('DOMContentLoaded', function() {
+        // Handle smooth scrolling
         if (window.location.hash === '#contact') {
             const contactSection = document.getElementById('contact');
             if (contactSection) {
                 contactSection.scrollIntoView({ behavior: 'smooth' });
             }
         }
+
+        // Handle alert timeout
+        const alerts = document.querySelectorAll('.success, .error');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                alert.style.opacity = '0';
+                alert.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    alert.remove();
+                }, 500);
+            }, 3000); // 3 seconds timeout
+        });
     });
   </script>
 </body>

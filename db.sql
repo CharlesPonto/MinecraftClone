@@ -1,8 +1,7 @@
--- Create the database
 CREATE DATABASE IF NOT EXISTS form_submissions;
 USE form_submissions;
 
--- Create the submissions table
+
 CREATE TABLE IF NOT EXISTS submissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,

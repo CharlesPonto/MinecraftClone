@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once 'database.php';
 
 // Generate a session ID if not exists
 if (!isset($_SESSION['user_id'])) {
@@ -53,11 +53,11 @@ if (!$submission) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Message</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <!-- <header>
         <div class="header-content">
             <a href="index.php"><img src="assets/logo.svg" alt="Minecraft Logo" class="logo"></a>
             <nav class="navbar">
@@ -66,9 +66,12 @@ if (!$submission) {
                 </ul>
             </nav>
         </div>
-    </header>
+    </header> -->
 
-    <div class="section">
+    <!-- Header with Logo and Navbar -->
+    <?php include('../components/header.html') ?>
+
+    <section id="contact" class="section">
         <h2>Edit Message</h2>
 
         <?php if (isset($success_message)): ?>
@@ -80,27 +83,39 @@ if (!$submission) {
         <?php endif; ?>
 
         <form method="POST" action="">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($submission['name']); ?>" required>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($submission['name']); ?>" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($submission['email']); ?>" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required><?php echo htmlspecialchars($submission['message']); ?></textarea>
+            
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="view_submissions.php" class="btnBack">Back</a>
             </div>
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($submission['email']); ?>" required>
-            </div>
-
-            <div class="form-group">
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required><?php echo htmlspecialchars($submission['message']); ?></textarea>
-            </div>
-
-            <button type="submit" class="btn">Update</button>
         </form>
-    </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2004 Minecraft Adventures. All rights reserved.</p>
-    </footer>
+    <!-- Footer -->
+    <?php include('../components/footer.html') ?>
+
+    <script>
+        // Handle alert timeout
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.success, .error');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    alert.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 500);
+                }, 3000); // 3 seconds timeout
+            });
+        });
+    </script>
 </body>
 </html> 

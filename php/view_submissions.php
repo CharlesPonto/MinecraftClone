@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once 'database.php';
 
 // Generate a session ID if not exists
 if (!isset($_SESSION['user_id'])) {
@@ -38,11 +38,11 @@ $submissions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Your Messages</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <!-- <header>
         <div class="header-content">
             <a href="index.php"><img src="assets/logo.svg" alt="Minecraft Logo" class="logo"></a>
             <nav class="navbar">
@@ -51,7 +51,11 @@ $submissions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </ul>
             </nav>
         </div>
-    </header>
+    </header> -->
+
+    <!-- Header with Logo and Navbar -->
+    <?php include('../components/header.html') ?>
+
 
     <div class="section">
         <h2>Your Messages</h2>
