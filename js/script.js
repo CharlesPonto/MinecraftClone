@@ -7,27 +7,39 @@ hamburger.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  // 1. SMOOTH SCROLL NAVIGATION
-  // This enables smooth scrolling when clicking on navigation links
-  const navLinks = document.querySelectorAll('a[href^="#"]');
+  // Handle all navigation functionality
+  function setupNavigation() {
+    // Setup smooth scrolling for all anchor links
+    const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+    smoothScrollLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      const targetSection = document.querySelector(targetId);
-
-      if (targetSection) {
-        window.scrollTo({
-          top: targetSection.offsetTop,
-          behavior: 'smooth'
-        });
-      }
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
     });
-  });
+
+    // Setup mobile menu link handling
+    const mobileNavLinks = document.querySelectorAll('.navbar a');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navbar.classList.remove('active');
+      });
+    });
+  }
+
+  // Initialize navigation
+  setupNavigation();
   
-  // 2. CYCLING TEXT EFFECT FOR WELCOME MESSAGEhjbhn
-  // This creates a typing and deleting animation that cycles through different game names
+  // 2. CYCLING TEXT EFFECT FOR WELCOME MESSAGE
   const heroHeading = document.querySelector('.hero-content h1');
   const baseText = "Welcome to ";
   const gameTexts = [
@@ -79,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(typeEffect, 1000);
   
   // 3. SCROLL ANIMATION FOR GAME CARDS
-  // This adds a slide-in effect when scrolling to game cards
   function isInViewport(element) {
     const rect = element.getBoundingClientRect();
     return (
@@ -110,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Mobile menu functionality
   if (hamburger) {
     hamburger.addEventListener('click', function() {
-      // Toggle the active class on both hamburger and navbar
       hamburger.classList.toggle('active');
       navbar.classList.toggle('active');
     });
@@ -124,16 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Close menu when clicking a link
-  const navLinks = document.querySelectorAll('.navbar a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      hamburger.classList.remove('active');
-      navbar.classList.remove('active');
-    });
-  });
-
-  // Handle smooth scrolling for anchor links
+  // Handle smooth scrolling for contact form
   if (window.location.hash === '#contact') {
     const contactSection = document.getElementById('contact');
     if (contactSection) {

@@ -57,16 +57,6 @@ if (!$submission) {
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- <header>
-        <div class="header-content">
-            <a href="index.php"><img src="assets/logo.svg" alt="Minecraft Logo" class="logo"></a>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="view_submissions.php">Back to Messages</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header> -->
 
     <!-- Header with Logo and Navbar -->
     <?php include('../components/header.html') ?>
