@@ -9,108 +9,123 @@ if (!isset($_SESSION['user_id'])) {
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $message = $_POST['message'] ?? '';
+    // Sanitize inputs
+    $name = trim(htmlspecialchars($_POST['name'] ?? ''));
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $message = trim(htmlspecialchars($_POST['message'] ?? ''));
     $session_id = $_SESSION['user_id'];
 
-    $sql = "INSERT INTO submissions (name, email, message, session_id) VALUES (?, ?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
-    
-    try {
-        $stmt->execute([$name, $email, $message, $session_id]);
-        $success_message = "Message sent successfully!";
-    } catch(PDOException $e) {
-        $error_message = "Error sending message: " . $e->getMessage();
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error_message = "Invalid email format";
+    } else {
+        // SQL query to insert data
+        $sql = "INSERT INTO submissions (name, email, message, session_id) VALUES (?, ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+
+        try {
+            $stmt->execute([$name, $email, $message, $session_id]);
+            $success_message = "Message sent successfully!";
+        } catch (PDOException $e) {
+            $error_message = "Error sending message: " . $e->getMessage();
+        }
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minecraft Adventures</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <script src="../js/script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Adventures</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="../js/script.js" defer></script>
 </head>
+
 <body>
-  <!-- Header with Logo and Navbar -->
-  <?php include('../components/header.html') ?>
+    <!-- Header with Logo and Navbar -->
+    <?php include('../components/header.html') ?>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Welcome to Minecraft Adventures!</h1>
-      <p>Explore, build, and survive in the blocky world of Minecraft.</p>
-      <a href="#about" class="btn">Learn More</a>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Minecraft Adventures!</h1>
+            <p>Explore, build, and survive in the blocky world of Minecraft.</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
+    </section>
 
-  <!-- About Section -->
-  <section id="about" class="section">
-    <h2>About Minecraft</h2>
-    <p>Minecraft is a sandbox game where you can build, explore, and survive in a blocky, pixelated world. Create your own adventures, fight mobs, and craft amazing structures!</p>
-    <img src="../assets/about.png" alt="Minecraft World" class="about-image">
-  </section>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2>About Minecraft</h2>
+        <p>Minecraft is a sandbox game where you can build, explore, and survive in a blocky, pixelated world. Create your own adventures, fight mobs, and craft amazing structures!</p>
+        <img src="../assets/about.png" alt="Minecraft World" class="about-image">
+    </section>
 
-  <!-- Games Section -->
-  <?php include('../components/games.html') ?>
+    <!-- Games Section -->
+    <?php include('../components/games.html') ?>
 
-  <!-- Trailers Section -->
-  <?php include('../components/trailers.html'); ?>
+    <!-- Trailers Section -->
+    <?php include('../components/trailers.html'); ?>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section">
-    <h2>Contact Us</h2>
-    <?php if (isset($success_message)): ?>
-        <div class="success"><?php echo $success_message; ?></div>
-    <?php endif; ?>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Contact Us</h2>
+        <?php if (isset($success_message)): ?>
+            <div class="success"><?php echo $success_message; ?></div>
+        <?php endif; ?>
 
-    <?php if (isset($error_message)): ?>
-        <div class="error"><?php echo $error_message; ?></div>
-    <?php endif; ?>
-    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>#contact">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Steve" required>
-      
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" placeholder="steve@minecraft.com" required>
-      
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
-      
-      <button type="submit" class="btn">Send</button>
-    </form>
-  </section>
+        <?php if (isset($error_message)): ?>
+            <div class="error"><?php echo $error_message; ?></div>
+        <?php endif; ?>
+        
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#contact">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Steve" required 
+                   value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>">
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="steve@minecraft.com" required
+                   value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Write your message here..." required><?php echo isset($_POST['message']) ? $_POST['message'] : ''; ?></textarea>
+            
+            <button type="submit" class="btn">Send</button>
+        </form>
+    </section>
 
-  <!-- Footer -->
-  <?php include('../components/footer.html') ?>
+    <!-- Footer -->
+    <?php include('../components/footer.html') ?>
 
-  <script>
-    // If there's a success or error message, ensure we're at the right position
-    document.addEventListener('DOMContentLoaded', function() {
-        // Handle smooth scrolling
-        if (window.location.hash === '#contact') {
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
+    <script>
+        // If there's a success or error message, ensure we're at the right position
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle smooth scrolling
+            if (window.location.hash === '#contact') {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             }
-        }
 
-        // Handle alert timeout
-        const alerts = document.querySelectorAll('.success, .error');
-        alerts.forEach(alert => {
-            setTimeout(() => {
-                alert.style.opacity = '0';
-                alert.style.transition = 'opacity 0.5s ease';
+            // Handle alert timeout
+            const alerts = document.querySelectorAll('.success, .error');
+            alerts.forEach(alert => {
                 setTimeout(() => {
-                    alert.remove();
-                }, 500);
-            }, 3000); // 3 seconds timeout
+                    alert.style.opacity = '0';
+                    alert.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 500);
+                }, 3000); // 3 seconds timeout
+            });
         });
-    });
-  </script>
+    </script>
 </body>
-</html> 
+
+</html>
