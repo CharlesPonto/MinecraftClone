@@ -106,4 +106,38 @@ document.addEventListener('DOMContentLoaded', function() {
   
   window.addEventListener('scroll', handleScroll);
   setTimeout(handleScroll, 100);
+
+  // Mobile menu functionality
+  if (hamburger) {
+    hamburger.addEventListener('click', function() {
+      // Toggle the active class on both hamburger and navbar
+      hamburger.classList.toggle('active');
+      navbar.classList.toggle('active');
+    });
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!hamburger.contains(event.target) && !navbar.contains(event.target)) {
+      hamburger.classList.remove('active');
+      navbar.classList.remove('active');
+    }
+  });
+
+  // Close menu when clicking a link
+  const navLinks = document.querySelectorAll('.navbar a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      hamburger.classList.remove('active');
+      navbar.classList.remove('active');
+    });
+  });
+
+  // Handle smooth scrolling for anchor links
+  if (window.location.hash === '#contact') {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 });

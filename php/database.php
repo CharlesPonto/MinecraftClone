@@ -1,8 +1,5 @@
 <?php
-$host = '127.0.0.1';
-$dbname = 'form_submissions';
-$username = 'root';
-$password = '';
+require_once '../config/db.php';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

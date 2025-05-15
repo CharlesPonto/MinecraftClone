@@ -63,6 +63,7 @@ header {
   border: none;
   cursor: pointer;
   padding: 10px;
+  z-index: 1000;
 }
 
 /* The three lines of the menu button */
@@ -72,6 +73,7 @@ header {
   height: 3px;
   background-color: #fff;
   position: relative;
+  transition: background-color 0.3s ease;
 }
 
 /* Create top and bottom lines using pseudo-elements */
@@ -83,7 +85,6 @@ header {
   background-color: #fff;
   position: absolute;
   left: 0;
-  /* Smooth animation when clicked */
   transition: all 0.3s ease;
 }
 
@@ -94,6 +95,23 @@ header {
 
 .hamburger-icon::after {
   top: 8px;
+}
+
+/* Active state - hide middle line */
+.hamburger.active .hamburger-icon {
+  background-color: transparent;
+}
+
+/* Active state - rotate top line */
+.hamburger.active .hamburger-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+/* Active state - rotate bottom line */
+.hamburger.active .hamburger-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
 }
 
 /* ====== NAVIGATION MENU ====== */
@@ -536,12 +554,13 @@ footer {
   /* Hide navigation by default */
   .navbar {
     display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 60px;
     left: 0;
     right: 0;
     background-color: #333;
     padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   /* Show navigation when active */
@@ -557,7 +576,9 @@ footer {
 
   /* Full-width navigation links */
   .navbar a {
+    padding: 15px;
     width: 100%;
+    text-align: center;
   }
 
   /* Adjust modal size */
